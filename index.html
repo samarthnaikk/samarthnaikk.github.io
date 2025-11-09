@@ -6,159 +6,267 @@
   <title>Samarth Naik — Portfolio</title>
   <meta name="description" content="Portfolio of Samarth Naik — systems, backend, app dev, AI/ML and cybersecurity projects." />
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#6ee7b7;--muted:#9aa7b2;--glass:rgba(255,255,255,0.03)}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial; background:linear-gradient(180deg,#071024 0%, #071229 60%);color:#e6eef6;line-height:1.5}
-    .container{max-width:1100px;margin:38px auto;padding:24px}
-    header{display:flex;gap:20px;align-items:center}
-    .avatar{width:96px;height:96px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#042025;font-size:32px}
-    h1{font-size:28px;margin:0}
-    p.lead{color:var(--muted);margin:6px 0 0}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:22px;margin-top:22px}
-    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.02)}
-    .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-    .projects .project{padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.01),transparent);margin-bottom:12px}
-    .project h4{margin:0 0 6px;font-size:16px}
-    .project p{margin:0;color:var(--muted);font-size:14px}
-    .tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
-    .tag{background:var(--glass);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:13px}
-    .skills{display:flex;flex-wrap:wrap;gap:10px}
-    .skill{background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:8px;color:var(--muted);font-size:13px}
-    footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}
-    a.button{display:inline-block;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),#60a5fa);color:#042025;text-decoration:none;font-weight:600}
-    .contact-list{list-style:none;padding:0;margin:0}
-    .contact-list li{margin-bottom:8px;color:var(--muted)}
-    pre{white-space:pre-wrap;word-wrap:break-word}
-    @media (max-width:900px){.grid{grid-template-columns:1fr;}.avatar{width:84px;height:84px}}
+    :root {
+      --bg: #1c1c1e;
+      --fg: #f5f5f7;
+      --muted: #a1a1aa;
+      --accent: #007aff;
+      --window: #2c2c2e;
+      --border: #3a3a3c;
+      --shadow: rgba(0,0,0,0.6);
+      --terminal-bg: #111113;
+      --terminal-green: #00ff7f;
+      --terminal-cursor: #00ff7f;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
+      line-height: 1.8;
+    }
+
+    .window {
+      background: var(--window);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 12px 40px var(--shadow);
+      margin: 60px auto;
+      max-width: 1200px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .titlebar {
+      background: linear-gradient(#3a3a3a, #2c2c2c);
+      display: flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 12px;
+    }
+    .traffic-lights {
+      display: flex;
+      gap: 8px;
+    }
+    .traffic-lights span {
+      display: block;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      transition: transform 0.2s;
+    }
+    .close { background: #ff5f56; }
+    .minimize { background: #ffbd2e; }
+    .maximize { background: #27c93f; }
+
+    .container { padding: 40px 60px; }
+
+    h1 { font-size: 36px; margin: 0; }
+    h3 { margin-top: 40px; font-size: 24px; }
+    p { color: var(--muted); font-size: 18px; }
+    a { color: var(--accent); text-decoration: none; }
+
+    .button {
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      font-size: 16px;
+    }
+    .button:hover { opacity: 0.85; }
+
+    .card {
+      background: #252527;
+      padding: 30px;
+      border-radius: 12px;
+      margin-top: 24px;
+      border: 1px solid var(--border);
+      font-size: 17px;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    .tag {
+      background: rgba(255,255,255,0.08);
+      color: var(--muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 15px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 15px;
+      margin: 40px 0;
+    }
+
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 1s, transform 1s; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    .terminal {
+      background: var(--terminal-bg);
+      color: var(--terminal-green);
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      height: 180px;
+      overflow-y: auto;
+      font-size: 16px;
+      border: 1px solid #1f1f1f;
+      box-shadow: inset 0 0 20px rgba(0,255,127,0.15);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      height: 18px;
+      background: var(--terminal-cursor);
+      margin-left: 3px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div class="avatar">SN</div>
-      <div>
-        <h1>Samarth Naik</h1>
-        <p class="lead">Systems & backend engineer • App developer • AI/ML & Cybersecurity enthusiast • Competitive programmer</p>
-        <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
-          <a class="button" href="#projects">View projects</a>
-          <a style="color:var(--muted);text-decoration:none" href="#contact">Contact</a>
-        </div>
+  <div class="window" id="window">
+    <div class="titlebar">
+      <div class="traffic-lights">
+        <span class="close"></span>
+        <span class="minimize"></span>
+        <span class="maximize"></span>
       </div>
-    </header>
-
-    <div class="grid">
-      <main>
-        <section class="card about">
-          <div class="section-title"><h3>About</h3><small style="color:var(--muted)">Last updated: Nov 9, 2025</small></div>
-          <p style="margin:0;color:var(--muted)">I build low-level systems, scalable backend services, and polished apps. My interests span OS design & internals, production backend systems, mobile & web apps, AI/ML research and applied models, and practical cybersecurity. I enjoy competitive programming and hardware/Verilog design in my spare time.</p>
-          <div class="tags" style="margin-top:12px">
-            <span class="tag">Location: India</span>
-            <span class="tag">Available for freelance & collaboration</span>
-            <span class="tag">ICPC / Competitive programming</span>
-          </div>
-        </section>
-
-        <section id="projects" class="card projects" style="margin-top:16px">
-          <div class="section-title"><h3>Selected projects</h3><a href="#contact" style="color:var(--muted);text-decoration:none">Request code</a></div>
-
-          <div class="project">
-            <h4>Advanced Operating System Experiments</h4>
-            <p>Collection of 10 OS-level projects covering kernel modules, process scheduling experiments, a microkernel prototype, memory allocators, and custom filesystems — focused on understanding internals and design tradeoffs.</p>
-            <div class="tags"><span class="tag">OS Design</span><span class="tag">Kernel</span><span class="tag">C / Assembly</span></div>
-          </div>
-
-          <div class="project">
-            <h4>Production-Grade Backend Suite</h4>
-            <p>Set of backend services including auth, event-driven pipelines, caching strategies, and observability tooling. Emphasis on reliability, performance, and deployment best practices.</p>
-            <div class="tags"><span class="tag">Go / Python</span><span class="tag">gRPC / REST</span><span class="tag">CI/CD</span></div>
-          </div>
-
-          <div class="project">
-            <h4>Full-stack App Projects</h4>
-            <p>10 end-to-end app projects (mobile + web) that demonstrate UX, offline sync, push notifications, and analytics integration — includes a production-style app template.</p>
-            <div class="tags"><span class="tag">React / React Native</span><span class="tag">TypeScript</span></div>
-          </div>
-
-          <div class="project">
-            <h4>AI / ML Pipelines & Demos</h4>
-            <p>Core ML experiments and applied projects: training pipelines, model serving, embeddings for retrieval-augmented generation, and evaluation dashboards.</p>
-            <div class="tags"><span class="tag">PyTorch</span><span class="tag">RAG</span><span class="tag">MLOps</span></div>
-          </div>
-
-          <div class="project">
-            <h4>Cybersecurity Tooling</h4>
-            <p>Security-focused projects including threat-hunting playbooks, secure coding checklist, and small defensive tooling for code analysis and incident triage.</p>
-            <div class="tags"><span class="tag">Blue Team</span><span class="tag">Secure Dev</span></div>
-          </div>
-
-          <div class="project">
-            <h4>Hardware / Verilog Design Experiments</h4>
-            <p>Clocked X-Y flip-flop designs, state-machine modeling and register-transfer level experiments used for learning digital design and synthesis.</p>
-            <div class="tags"><span class="tag">Verilog</span><span class="tag">FPGA</span></div>
-          </div>
-
-          <div class="project">
-            <h4>Competitive Programming & Problem-Sets</h4>
-            <p>Practice sets and solutions optimized for speed and correctness; includes algorithm explanations and template libraries used for contests like ICPC.</p>
-            <div class="tags"><span class="tag">C++</span><span class="tag">Algorithms</span></div>
-          </div>
-
-        </section>
-
-        <section class="card" style="margin-top:16px">
-          <div class="section-title"><h3>Experience & Education</h3><div style="color:var(--muted);font-size:13px">Selected highlights</div></div>
-          <ul style="margin:0;padding-left:18px;color:var(--muted)">
-            <li style="margin-bottom:8px"><strong>Systems & Backend Engineer</strong> — designed scalable services and optimized performance-critical components.</li>
-            <li style="margin-bottom:8px"><strong>App Developer</strong> — shipped cross-platform mobile & web apps, focusing on UX and maintainability.</li>
-            <li style="margin-bottom:8px"><strong>Research & Projects</strong> — conducted ML experiments and RAG system prototypes.</li>
-          </ul>
-        </section>
-
-      </main>
-
-      <aside>
-        <div class="card">
-          <div class="section-title"><h3>Contact</h3><a href="mailto:samarth@example.com" style="color:var(--muted);text-decoration:none">samarth@example.com</a></div>
-          <ul class="contact-list" style="margin-top:8px">
-            <li>Location: India</li>
-            <li>GitHub: <a href="https://github.com/samarthnaik" style="color:var(--accent);text-decoration:none">github.com/samarthnaik</a></li>
-            <li>LinkedIn: <a href="#" style="color:var(--accent);text-decoration:none">/in/samarth</a></li>
-          </ul>
-          <div style="margin-top:14px"><a class="button" href="#projects">Download resume</a></div>
-        </div>
-
-        <div class="card" style="margin-top:12px">
-          <div class="section-title"><h3>Skills</h3><small style="color:var(--muted)">Technologies & tools</small></div>
-          <div class="skills">
-            <span class="skill">C / C++</span>
-            <span class="skill">Go</span>
-            <span class="skill">Python</span>
-            <span class="skill">TypeScript</span>
-            <span class="skill">React</span>
-            <span class="skill">React Native</span>
-            <span class="skill">PyTorch</span>
-            <span class="skill">Docker</span>
-            <span class="skill">Kubernetes</span>
-            <span class="skill">Verilog</span>
-            <span class="skill">Linux internals</span>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:12px">
-          <h3 style="margin:0 0 8px 0">Quick links</h3>
-          <p style="margin:0;color:var(--muted);font-size:14px">Use these to share or fork this template.</p>
-          <div style="margin-top:10px;display:flex;gap:8px;flex-direction:column">
-            <a class="button" href="#">Edit in editor</a>
-            <a style="color:var(--muted);text-decoration:none" href="#">Download HTML</a>
-          </div>
-        </div>
-
-      </aside>
     </div>
 
-    <footer>
-      Crafted with care • If you'd like edits (layout, colors, more projects), tell me what to change.
-    </footer>
+    <div class="container">
+      <header>
+        <h1>Samarth Naik</h1>
+        <p>Systems & backend engineer • App developer • AI/ML & Cybersecurity enthusiast • Competitive programmer</p>
+        <a class="button" href="#projects">View Projects</a>
+      </header>
+
+      <div class="terminal" id="terminal"></div>
+
+      <section id="about" class="card fade-in">
+        <h3>About Me</h3>
+        <p>I design scalable systems and build across the stack — from OS-level code and backend services to mobile apps and AI pipelines. Enthusiastic about clean architecture, optimization, and digital design.</p>
+      </section>
+
+      <section id="projects" class="card fade-in">
+        <h3>Projects</h3>
+        <div>
+          <h4>🧠 Advanced OS Internals</h4>
+          <p>Kernel-level schedulers, memory allocators, and microkernel experiments.</p>
+          <div class="tags"><span class="tag">C</span><span class="tag">Kernel</span><span class="tag">Assembly</span></div>
+        </div>
+
+        <div>
+          <h4>⚙️ Backend Suite</h4>
+          <p>Distributed backend stack with gRPC, Redis caching, observability, and automation.</p>
+          <div class="tags"><span class="tag">Go</span><span class="tag">Python</span><span class="tag">Kubernetes</span></div>
+        </div>
+
+        <div>
+          <h4>📱 App Projects</h4>
+          <p>Modern mobile/web applications with offline support and analytics integrations.</p>
+          <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span></div>
+        </div>
+
+        <div>
+          <h4>🔒 Cybersecurity Tools</h4>
+          <p>Blue-team scripts, static analysis tools, and incident response playbooks.</p>
+          <div class="tags"><span class="tag">Security</span><span class="tag">Automation</span></div>
+        </div>
+      </section>
+
+      <section id="contact" class="card fade-in">
+        <h3>Contact</h3>
+        <p>Email: <a href="mailto:samarth@example.com">samarth@example.com</a></p>
+        <p>GitHub: <a href="https://github.com/samarthnaik">github.com/samarthnaik</a></p>
+        <p>LinkedIn: <a href="#">/in/samarth</a></p>
+      </section>
+    </div>
   </div>
+
+  <footer>
+    © 2025 Samarth Naik — macOS + Terminal edition • Made with HTML, CSS & JS
+  </footer>
+
+  <script>
+    // Fade-in animation on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Traffic light interaction
+    document.querySelectorAll('.traffic-lights span').forEach(light => {
+      light.addEventListener('click', () => {
+        light.style.transform = 'scale(0.8)';
+        setTimeout(() => light.style.transform = 'scale(1)', 150);
+      });
+    });
+
+    // Terminal typing effect
+    const terminal = document.getElementById('terminal');
+    const lines = [
+      'Initializing system... ✅',
+      'Loading portfolio modules...',
+      'Fetching projects and experience...',
+      'Setting up UI animations...',
+      'Portfolio ready! Type `help` for commands.'
+    ];
+    let line = 0;
+
+    function typeLine() {
+      if (line < lines.length) {
+        let text = lines[line];
+        let i = 0;
+        let interval = setInterval(() => {
+          terminal.innerHTML += text[i++];
+          if (i === text.length) {
+            clearInterval(interval);
+            terminal.innerHTML += '\n';
+            line++;
+            setTimeout(typeLine, 400);
+          }
+        }, 50);
+      } else {
+        terminal.innerHTML += '\n> ';
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+        terminal.appendChild(cursor);
+      }
+    }
+
+    setTimeout(typeLine, 800);
+
+    // Command simulation
+    document.addEventListener('keydown', e => {
+      const cursor = document.querySelector('.cursor');
+      if (!cursor) return;
+      const commandArea = terminal;
+      if (e.key === 'Enter') {
+        const content = commandArea.textContent.split('> ').pop().trim();
+        if (content === 'help') {
+          commandArea.innerHTML += '\nAvailable commands:\n- about\n- projects\n- contact\n- clear\n> ';
+        } else if (content === 'clear') {
+          commandArea.innerHTML = '> ';
+        } else if (['about','projects','contact'].includes(content)) {
+          document.querySelector('#' + content).scrollIntoView({ behavior: 'smooth' });
+        } else {
+          commandArea.innerHTML += `\nCommand not found: ${content}\n> `;
+        }
+      }
+    });
+  </script>
 </body>
 </html>
